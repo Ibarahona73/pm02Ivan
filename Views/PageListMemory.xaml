@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:convert="clr-namespace:pm02Ivan.Convertir"
+             xmlns:local="clr-namespace:pm02Ivan.Views"
+             x:Class="pm02Ivan.Views.PageListMemory"
+             Title="PageListMemory">
+
+    <ContentPage.Resources>
+        <convert:base64Image x:Key="BaseArray" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            
+            <Image Source="aa.jpg" Aspect="AspectFill" />
+
+            
+            <StackLayout Margin="10" VerticalOptions="FillAndExpand">
+                
+                <!-- Botones -->
+                <Button Margin="5,5,5,5" Command="{Binding NuevoProductoCommand}" CommandParameter="{x:Type local:MemoryPage}" CornerRadius="20" Text="Crear Recordatorio" />
+                <Button Margin="5,5,5,5" Command="{Binding GoToDetailsCommand}" CommandParameter="{x:Type local:MemoryPage}" CornerRadius="20" Text="Actualizar Recordatorio" BackgroundColor="#5298df"/>
+                <Button Margin="5,5,5,5" Command="{Binding DeleteCommand}" CommandParameter="{x:Type local:MemoryPage}" CornerRadius="20" Text="Borrar Recordatorio" BackgroundColor="#0bb98b"/>
+                <Button Margin="5,5,5,5" Command="{Binding HearCommand}" CommandParameter="{x:Type local:MemoryPage}" CornerRadius="20" Text="Escuchar Audio" BackgroundColor="Thistle"/>
+                <Button Margin="5,5,5,10" Command="{Binding ChangeOrderByCommand}" CommandParameter="{x:Type local:MemoryPage}" CornerRadius="20" Text="Filtrar Orden" BackgroundColor="PaleVioletRed"/>
+
+                <!-- ListView -->
+                <ListView ItemsSource="{Binding memo}" SelectedItem="{Binding SelectedMemory}" RowHeight="60" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" >
+                                    <Image HeightRequest="75" Source="{Binding Foto, Converter={StaticResource BaseArray}}" WidthRequest="75" />
+                                    <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                                        <Label FontSize="14" Text="{Binding Desc ,StringFormat='Descripcion: {0}' }" VerticalOptions="Center" />
+                                        <Label FontSize="12" Text="{Binding Fecha, StringFormat='Fecha: {0:dd/MM/yyyy}'}" TextColor="#ebedec" VerticalOptions="Center" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

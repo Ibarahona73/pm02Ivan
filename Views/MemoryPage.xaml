@@ -1,0 +1,61 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:convert="clr-namespace:pm02Ivan.Convertir"
+             xmlns:cx="clr-namespace:pm02Ivan.ViewModel"
+             x:Class="pm02Ivan.Views.MemoryPage"
+             Title="MemoryPage">
+
+    <ContentPage.Resources>
+        <convert:base64Image x:Key="BaseArray" />
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <cx:MemoryViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid Margin="20"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+            <!-- Fondo de pantalla -->
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="1" Grid.Column="0" Text="Fecha" FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+            <DatePicker Grid.Row="1" Grid.Column="1" Date="{Binding Fecha}" FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Text="Descripcion" FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+            <Entry Grid.Row="2" Grid.Column="1" Text="{ Binding Desc }" FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+
+            <Label Grid.Row="3" Grid.Column="0" Text="Grab. Audio" FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" TranslationY="-40"/>
+
+            <Button Grid.Row="4" Grid.Column="1"  Command="{Binding AudioCommand}" BackgroundColor="Sienna"  FontSize="12" VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="FillAndExpand" TranslationY="-170" x:Name="GbBoton" CornerRadius="20" MaximumWidthRequest="140" Text="Grabar Audio"/>
+
+            <Image x:Name="imgSitio" Grid.Row="3" Grid.Column="0" Margin="0,0,0,10" Aspect="AspectFill"  HeightRequest="200" HorizontalOptions="FillAndExpand" 
+                   Source="{Binding Foto, Converter={StaticResource BaseArray}}" VerticalOptions="CenterAndExpand" WidthRequest="260" TranslationY="135" TranslationX="80"/>
+
+            <Button x:Name="btnTomarFoto" Grid.Row="3" Grid.Column="0"  Command="{Binding FotoCommand}" CommandParameter="{Binding .}" CornerRadius="20" FontSize="18" HeightRequest="45" 
+                    HorizontalOptions="FillAndExpand" Text="Tomar Foto" BackgroundColor="#a869ff" TranslationY="270" TranslationX="80"/>
+
+            <Button Grid.Row="4" Grid.Column="0" 
+                    Text="Recordatorio Nuevo" Command="{Binding CreateCommand}" BackgroundColor="#84863c"  TextColor="Black" FontSize="12" VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="FillAndExpand" TranslationY="200"  CornerRadius="20"/>
+
+            <Button Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" BackgroundColor="Cyan"  Command="{Binding UpdateCommand}" FontSize="12" HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding VisibilityUpdate}" Text="Actualizar Recordatorio" TextColor="Black" VerticalOptions="CenterAndExpand" TranslationY="200"/>
+
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
